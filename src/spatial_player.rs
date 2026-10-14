@@ -188,7 +188,11 @@ impl SpatialPlayer {
 
     /// Attempts to seek to a given position in the current source.
     ///
-    /// This blocks between 0 and ~5 milliseconds.
+    /// This blocks until the audio thread next checks for a seek, which it does every
+    /// ~5 milliseconds of the source's audio. Playback speed stretches that in real
+    /// time: at [`set_speed(0.5)`](SpatialPlayer::set_speed) the wait can be ~10
+    /// milliseconds, in general up to ~5 milliseconds divided by the speed. Performing
+    /// the seek, for example in a decoder, takes its own time on top of that.
     ///
     /// As long as the duration of the source is known seek is guaranteed to saturate
     /// at the end of the source. For example given a source that reports a total duration

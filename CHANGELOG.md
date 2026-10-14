@@ -32,6 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved AGC algorithm, now ~25% faster and volume changes are more stable
 - Default sample rate changed from 44.1 kHz to 48 kHz consistently.
 - `open_sink_or_fallback` now tries 48 kHz and 44.1 kHz before the device's maximum sample rate.
+- Corrected the `Player::try_seek()` and `SpatialPlayer::try_seek()` docs: the wait scales
+  with playback speed (~10 ms at half speed), it isn't capped at ~5 ms.
 
 ### Removed
 
